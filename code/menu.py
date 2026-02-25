@@ -5,9 +5,9 @@ from Game import Game
 
 
 class Menu(Game):
-    def __init__(self):
-        self.window = None
-        self.Attribute1 = None
+    def __init__(self, window):
+        self.window = window
+
 
     def run(self, ):
         pass
