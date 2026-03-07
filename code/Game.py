@@ -1,5 +1,5 @@
 import pygame
-
+import sys
 from code.Level import Level
 from code.Const import WIN_WIDTH, WIN_HEIGHT, MENU_OPTION
 
