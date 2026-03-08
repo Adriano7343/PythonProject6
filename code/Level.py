@@ -18,7 +18,6 @@ def extend(param):
 
 class Level:
     def __init__(self, window, name, game_mode):
-        self.timeout = 20000  # 20 segundos
         self.window = window
         self.name = name
         self.game_mode = game_mode
@@ -28,7 +27,7 @@ class Level:
         if game_mode in [MENU_OPTION[1], MENU_OPTION[2]]:
             self.entity_list.append(EntityFactory.get_entity('Player2'))
         pygame.time.set_timer(EVENT_ENEMY, SPAWN_TIME)
-
+        self.timeout = 20000  # 20 segundos
 
     def run(self, ):
         pygame.mixer_music.load(f'./asset/{self.name}.mp3')
@@ -45,7 +44,9 @@ class Level:
                 if event.type == EVENT_ENEMY:
                     choice = random.choice(('Enemy1', 'Enemy2'))
                     self.entity_list.append(EntityFactory.get_entity(choice))
+
             # printed text
+
             self.level_text(14, f'{self.name} - timeout:{self.timeout / 1000 : .1f}s', COLOR_WHITE, (10, 5))
             self.level_text(14, f'fps: {clock.get_fps() :.0f}', COLOR_WHITE, (10, WIN_HEIGHT - 35))
             self.level_text(14, f'entimidates: {len(self.entity_list)}', COLOR_WHITE, (10, WIN_HEIGHT - 20))

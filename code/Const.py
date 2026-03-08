@@ -40,6 +40,7 @@ Player_KEY_SHOOT = {'Player1': pygame.K_RCTRL,
                     'Player2': pygame.K_LCTRL}
 #S
 SPAWN_TIME =4000
+
 # W
 WIN_WIDTH = 576
 WIN_HEIGHT = 324
