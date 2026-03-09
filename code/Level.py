@@ -10,6 +10,7 @@ import sys
 from code.EntityFactory import EntityFactory
 from code.Entity import Entity
 from code.Const import COLOR_WHITE, WIN_HEIGHT, MENU_OPTION, EVENT_ENEMY, SPAWN_TIME
+from code.EntityMediator import EntityMediator
 
 
 def extend(param):
@@ -52,6 +53,9 @@ class Level:
             self.level_text(14, f'entimidates: {len(self.entity_list)}', COLOR_WHITE, (10, WIN_HEIGHT - 20))
 
             pygame.display.flip()
+            #collisions
+            EntityMediator.verify_collision(entity_list=self.entity_list)
+            EntityMediator.verify_health(entity_list=self.entity_list)
         pass
 
     def level_text(self, text_size: int, text: str, text_color: tuple, text_pos: tuple):
