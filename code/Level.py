@@ -7,10 +7,13 @@ import pygame
 from pygame import Rect, Surface
 from pygame.font import Font
 import sys
+
+from code.Enemy import Enemy
 from code.EntityFactory import EntityFactory
 from code.Entity import Entity
 from code.Const import COLOR_WHITE, WIN_HEIGHT, MENU_OPTION, EVENT_ENEMY, SPAWN_TIME
 from code.EntityMediator import EntityMediator
+from code.Player import Player
 
 
 def extend(param):
@@ -39,6 +42,10 @@ class Level:
             for ent in self.entity_list:
                 self.window.blit(source=ent.surf, dest=ent.rect)
                 ent.move()
+                if isinstance(ent, (Player, Enemy)):
+                    shoot = ent.shoot()
+                    if shoot is not None:
+                        self.entity_list.append(shoot)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
@@ -53,7 +60,7 @@ class Level:
             self.level_text(14, f'entimidates: {len(self.entity_list)}', COLOR_WHITE, (10, WIN_HEIGHT - 20))
 
             pygame.display.flip()
-            #collisions
+            # collisions
             EntityMediator.verify_collision(entity_list=self.entity_list)
             EntityMediator.verify_health(entity_list=self.entity_list)
         pass
